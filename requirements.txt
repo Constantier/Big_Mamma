@@ -9,4 +9,3 @@ requests
 googleapiclient
 google
 google_auth_oauthlib
-./Big_Mamma/
