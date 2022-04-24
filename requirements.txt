@@ -2,7 +2,6 @@ streamlit==1.6.0
 pandas
 numpy
 plotly
-json
 requests
 googleapiclient
 google
