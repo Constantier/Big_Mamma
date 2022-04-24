@@ -1,29 +1,12 @@
-# packaging
-pip>=9
-setuptools>=26
-twine
-wheel>=0.29
-
-# data science
-numpy
+streamlit
+os
 pandas
-scikit-learn
-
-# tests/linter
-black
-coverage
-flake8
-pytest
-yapf
-
-# API
-gcsfs
-google-cloud-storage
-mlflow
-s3fs
-
-# utilities
-six>=1.14
-joblib
-memoized-property
-termcolor
+numpy
+sqlite3
+plotly
+json
+requests
+googleapiclient
+google
+google_auth_oauthlib
+./Big_Mamma/

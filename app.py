@@ -1,9 +1,11 @@
 import streamlit as st
+
 from Big_Mamma.data_base import generate_db
 from Big_Mamma.get_data import get_sports_event_europe
 from Big_Mamma.data_base import create_connection
 import pandas as pd
 import plotly.express as px
+import numpy as np
 
 import os
 import sqlite3
@@ -26,7 +28,7 @@ WHERE i.Categorie LIKE ? AND i.Name LIKE ? AND v.date >= DATE(?) AND v.date <= D
 
 '# :pizza: Big Mamma Sales Viz :pizza:'
 
-db_path=os.path.join(os.path.dirname(os.path.dirname(__file__)),'Big_Mamma/data/sales.db')
+db_path=os.path.join(os.path.dirname(__file__),'Big_Mamma/Big_Mamma/data/sales.db')
 
 conn=create_connection(db_path)
 
@@ -98,7 +100,7 @@ if sports:
                                                                                                         labels={
                                                                                                         "value": "Date",
                                                                                                         "y": "Event"
-                                                                                                    },)
+                                                                                                    },height=np.sqrt(len(events))*100)
     graph.update_traces(mode="markers+lines",hovertemplate="<br>".join([
         "Event: %{y}",
         "Start Date: %{customdata[0]}",
