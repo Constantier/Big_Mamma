@@ -1,4 +1,4 @@
-from webbrowser import get
+import pandas as pd
 import requests
 import os
 import json
@@ -11,11 +11,29 @@ from googleapiclient.errors import HttpError
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
+def transfo_date_events(date,start=True):
+    '''
+    Retrun the start or end date of an event
+    Take date as serie and start as bool
+    If start = True -> Return the start date
+    If start = False -> Return End date
+    '''
+    if '-' in date:
+        date=date.split('-') #checking if there is one or two date
+        for index,day in enumerate(date):
+            if day.replace(' ','').isnumeric(): #if there is only a numeric value on the start date -> it is the same month
+                date[index]=day + ' '.join(date[1].split(' ')[2:]) #concat the month and year from the end date
+            elif len(day.split(' '))==3: #if the first date have a different month but no year (so 3 elements because there is a space first) it is the same year
+                date[index]=day + ' '.join(date[1].split(' ')[3:])
+    else :
+        date=[date,date]
+    if start:
+        return date[0]
+    return date[1]
+
 def get_sports_event_europe(date_from,date_to):
     '''
-    Return a list of dict with all sports events between date_from and date_to.
-
-    Each dict event contain : the name, the dates and the city(ies) where the event take place
+    Return a dataframe with all sports events between date_from and date_to.
 
     The dates must be in the format : 'yyyy-mm-dd'
 
@@ -52,6 +70,11 @@ def get_sports_event_europe(date_from,date_to):
             'date':event['date'],
             'locations':cities
         })
+    eur_events=pd.DataFrame(eur_events)
+    eur_events['Start date']=eur_events.apply(lambda x:transfo_date_events(x['date'],start=True),axis=1)
+    eur_events['End date']=eur_events.apply(lambda x:transfo_date_events(x['date'],start=False),axis=1)
+    eur_events=eur_events.drop(columns=['date'])
+
     return eur_events
 
 def get_data_sales(sheet, spreadsheet_id='1dYY5HU0h81NchR1xviaZF5HvCoS-rIY5ilgpVhFrE7U'):
