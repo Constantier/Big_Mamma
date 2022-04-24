@@ -1,7 +1,6 @@
 streamlit==1.6.0
 pandas
 numpy
-sqlite3
 plotly
 json
 requests
