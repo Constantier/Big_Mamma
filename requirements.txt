@@ -1,6 +1,7 @@
-streamlit==1.6.0
+streamlit
 pandas
 numpy
 plotly
 requests
 google-api-python-client
+./Big_Mamma
