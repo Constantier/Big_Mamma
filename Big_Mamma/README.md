@@ -5,9 +5,9 @@ This package is used to fetch data from 2 API:
 
 The package contain 2 modules:
 - get_data : set communication and request data from the 2 API
-- data_base : in charge of building a SQL database with the sales. This DB is stored in the data folder
+- data_base : in charge of updating a SQL database with the sales. This DB is stored in the data folder
 
-**generate_db** is the main function from the **data_base** module. It refresh the SQL database with sales.
+**update_db** is the main function from the **data_base** module. It refresh the SQL database with sales.
 **get_sports_event_europe** in the **get_data** module is the function to query the sport API
 
 It requires a few setup:
