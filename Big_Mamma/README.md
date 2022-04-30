@@ -1,74 +1,22 @@
-# Data analysis
-- Document here the project: Big_Mamma
-- Description: Project Description
-- Data Source:
-- Type of analysis:
+# Big Mamma Package
+This package is used to fetch data from 2 API:
+- Google Sheet : [a google sheet](https://docs.google.com/spreadsheets/d/1dYY5HU0h81NchR1xviaZF5HvCoS-rIY5ilgpVhFrE7U/edit#gid=0) contain all the sales of 2021 and i use Google API to fetch it
+- allsportdb : it is an API that give you sports events during a period and a region
 
-Please document the project the better you can.
+The package contain 2 modules:
+- get_data : set communication and request data from the 2 API
+- data_base : in charge of building a SQL database with the sales. This DB is stored in the data folder
 
-# Startup the project
+**generate_db** is the main function from the **data_base** module. It refresh the SQL database with sales.
+**get_sports_event_europe** in the **get_data** module is the function to query the sport API
 
-The initial setup.
-
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
-```
-
-Unittest test:
-```bash
-make clean install test
-```
-
-Check for Big_Mamma in gitlab.com/{group}.
-If your project is not set please add it:
-
-- Create a new project on `gitlab.com/{group}/Big_Mamma`
-- Then populate it:
-
-```bash
-##   e.g. if group is "{group}" and project_name is "Big_Mamma"
-git remote add origin git@github.com:{group}/Big_Mamma.git
-git push -u origin master
-git push -u origin --tags
-```
-
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-Big_Mamma-run
-```
-
-# Install
-
-Go to `https://github.com/{group}/Big_Mamma` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
-```
-
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/Big_Mamma.git
-cd Big_Mamma
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-Big_Mamma-run
-```
+It requires a few setup:
+- pip install all the packages in 'requirements.txt' -> pip install -r requirements.txt
+- A Google Cloud Platform project with the API enabled. To create a project and enable an API, refer to Create a project and enable the [API](https://developers.google.com/workspace/guides/create-project)
+- Authorization credentials for a desktop application. To learn how to create credentials for a desktop application, refer to [Create credentials](https://developers.google.com/workspace/guides/create-credentials).
+- Download the json credentials file from google and put it in the folder './Big_Mamma/json'
+- On the first 'Refresh Google sheet data', you will be prompt to grant access the app to your google sheets (in read-mode only)
+- Create an account on [AllSportDB](https://allsportdb.com)
+- Activate an API key (only works with Standard plan)
+- Create a file 'all_sport_db.json' in ./Big_Mamma/json
+- Write your API key on the format : {"key":"< your key >"}
