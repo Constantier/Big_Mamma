@@ -5,4 +5,4 @@ plotly==5.7.0
 requests==2.27.1
 google-auth-oauthlib==0.5.1
 google-api-python-client==2.46.0
-./Big_Mamma
+-e ./Big_Mamma
