@@ -126,9 +126,11 @@ def update_db():
     if conn is not None:
         # looping on each line of the sheet
         for i in range(1, len(sheet_ventes)):
+
             # check if the line with this date and this item_id exist on the table Ventes
-            if line_exist_vente(conn,sheet_ventes[i][0],sheet_ventes[i][1]):
+            if line_exist_vente(conn,sheet_ventes[i][0],sheet_ventes[i][1])[0]:
                 #update the line if it exist
+
                 update_line_vente(conn,sheet_ventes[i])
             else :
                 #create it otherwise
@@ -136,7 +138,7 @@ def update_db():
 
         # doing the same for the table items
         for i in range(1, len(sheet_items)):
-            if line_exist_item(conn,sheet_items[i][0]):
+            if line_exist_item(conn,sheet_items[i][0])[0]:
                 update_line_item(conn,sheet_items[i])
             else :
                 create_item(conn,sheet_items[i])
